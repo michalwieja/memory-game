@@ -1,0 +1,13 @@
+.grid {
+    display: grid;
+    grid-template: "1fr 1fr 1fr 1fr";
+    grid-gap: 1rem;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+img {
+    height: 100px;
+    width: 100px;
+}
