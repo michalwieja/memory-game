@@ -10,6 +10,7 @@
 
 <body>
     <div class="info">
+        <h3>hej <span id="nameValue"></span></h3>
         <h3>wynik: <span id="score">0</span></h3>
         <h4>liczba ruchów: <span id="turns">0</span></h3>
     </div>
@@ -29,6 +30,19 @@
         <h3>gratulacje!</h3>
         <h4>Gra ukończona w <span id="endTurns"> </span> ruchach</h4>
         <h5>F5 by zagrac jeszcze raz</h5>
+    </div>
+    <div class="pop form">
+        <div class="logo"></div>
+        <form>
+            <input autocomplete="off" type="text" placeholder="podaj imie" id="name" required>
+            <select name="level" id="level">
+                <option value="easy">łatwy</option>
+                <option value="medium">średni</option>
+                <option value="hard">trudny</option>
+
+            </select>
+            <input type="submit" onclick="startGame();">
+        </form>
     </div>
 
 

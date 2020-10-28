@@ -13,6 +13,14 @@ body {
 
 }
 
+.logo {
+    background-image: url('./img/gili.svg');
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+
 .pop {
     position: absolute;
     background: rgba(68, 68, 68, 0.80);
@@ -34,6 +42,8 @@ body {
     align-items: center;
     justify-content: space-evenly;
     text-align: center;
+    background: rgba(68, 68, 68, 1);
+
 }
 
 .info {
@@ -41,6 +51,16 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    opacity: 1;
+    visibility: visible;
+    background: rgba(68, 68, 68, 1);
+
 }
 
 h3 {
@@ -71,6 +91,27 @@ button {
     background-size: cover;
 
 }
+
+
+form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+input,
+select {
+    width: 50%;
+    height: 5vh;
+    font-size: 3vh;
+    text-align: center;
+    text-align-last: center;
+
+}
+
 
 
 @media (max-width:1024px) {
