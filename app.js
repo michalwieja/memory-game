@@ -33,6 +33,10 @@ let cardsWon = [];
 
 const grid = document.querySelector(".grid");
 const score = document.querySelector("#score");
+const turns = document.querySelector("#turns");
+const endTurns = document.querySelector("#endTurns");
+
+let turnsNumber = 0;
 
 cardsArray.forEach((card, index) => {
   let button = document.createElement("button");
@@ -88,6 +92,7 @@ function check() {
   if (cardsWon.length === cardsArray.length / 2) {
     won.style.opacity = 1;
     won.style.visibility = "visible";
+    endTurns.textContent = turnsNumber;
   }
 }
 
@@ -103,5 +108,7 @@ function flipcard() {
 
   if (choosenCards.length === 2) {
     setTimeout(check, 500);
+    turnsNumber++;
+    turns.textContent = turnsNumber;
   }
 }
