@@ -124,7 +124,9 @@ select {
     font-size: 3vh;
     text-align: center;
     text-align-last: center;
-
+    color: #6D2128;
+    background-color: #fff;
+    border: none;
 }
 
 
