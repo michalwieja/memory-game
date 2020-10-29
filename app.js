@@ -1,9 +1,13 @@
 function startGame() {
   event.preventDefault();
 
+
+
   let choosenCards = [];
   let choosenCardsId = [];
   let cardsWon = [];
+  let cardsShuffled;
+  let turnsNumber = 0;
   const name = document.querySelector("#name").value;
   const level = document.querySelector("#level").value;
   const match = document.querySelector(".match");
@@ -16,12 +20,14 @@ function startGame() {
   const turns = document.querySelector("#turns");
   const endTurns = document.querySelector("#endTurns");
 
-  let turnsNumber = 0;
+
   const nameValue = document.querySelector("#nameValue");
+
+  
 
   form.style.opacity = 0;
   form.style.visibility = "hidden";
-  // Displaying the value
+
   nameValue.textContent = name;
 
   const cardsArray = [
@@ -51,20 +57,19 @@ function startGame() {
     { name: "zolw", img: "./img/zolw.svg" },
   ];
 
-  let cardsLevel;
+ 
   if (level === "easy") {
-    cardsLevel = cardsArray.slice(12);
+    cardsShuffled = cardsArray.slice(12);
+    grid.classList.add('easy')
   } else if (level === "medium") {
-    cardsLevel = cardsArray.slice(8);
+    cardsShuffled = cardsArray.slice(8);
   } else if (level === "hard") {
-    cardsLevel = cardsArray.slice(0);
+    cardsShuffled = cardsArray.slice(0);
   }
 
-  console.log(cardsLevel);
-  cardsLevel.sort(() => 0.5 - Math.random());
-  console.log(cardsLevel);
+  cardsShuffled.sort(() => 0.5 - Math.random());
 
-  cardsLevel.forEach((card, index) => {
+  cardsShuffled.forEach((card, index) => {
     let button = document.createElement("button");
 
     button.setAttribute("data-id", index);
@@ -72,34 +77,54 @@ function startGame() {
     grid.appendChild(button);
   });
 
+
+   // flip
+
+   function flipcard() {
+    let id = this.getAttribute("data-id");
+    this.style.backgroundImage = `url(${cardsShuffled[id].img})`;
+    this.disabled = true;
+
+    choosenCards.push(cardsShuffled[id].name);
+    choosenCardsId.push(id);
+
+    if (choosenCards.length === 2) {
+      setTimeout(check, 1000);
+      turnsNumber++;
+      turns.textContent = turnsNumber;
+    }
+  }
   // check
 
   function check() {
     let cards = document.querySelectorAll("button");
+
     let firstId = choosenCardsId[0];
     let secondId = choosenCardsId[1];
 
     if (choosenCards[0] === choosenCards[1]) {
-      match.style.opacity = 1;
-      match.style.visibility = "visible";
 
-      setTimeout(function () {
-        match.style.opacity = 0;
-        match.style.visibility = "hidden";
-      }, 1000);
+
+      // match.style.opacity = 1;
+      // match.style.visibility = "visible";
+
+      // setTimeout(function () {
+      //   match.style.opacity = 0;
+      //   match.style.visibility = "hidden";
+      // }, 1000);
 
       cards[firstId].style.backgroundImage = `url(./img/white.svg)`;
       cards[secondId].style.backgroundImage = `url(./img/white.svg)`;
 
       cardsWon.push(choosenCards);
     } else {
-      fail.style.opacity = 1;
-      fail.style.visibility = "visible";
+      // fail.style.opacity = 1;
+      // fail.style.visibility = "visible";
 
-      setTimeout(function () {
-        fail.style.opacity = 0;
-        fail.style.visibility = "hidden";
-      }, 1000);
+      // setTimeout(function () {
+      //   fail.style.opacity = 0;
+      //   fail.style.visibility = "hidden";
+      // }, 1000);
 
       cards[firstId].style.backgroundImage = `url(./img/gili.svg)`;
       cards[secondId].style.backgroundImage = `url(./img/gili.svg)`;
@@ -111,27 +136,12 @@ function startGame() {
     choosenCardsId = [];
 
     score.textContent = cardsWon.length;
-    if (cardsWon.length === cardsLevel.length / 2) {
+    if (cardsWon.length === cardsShuffled.length / 2) {
       won.style.opacity = 1;
       won.style.visibility = "visible";
       endTurns.textContent = turnsNumber;
     }
   }
 
-  // flip
-
-  function flipcard() {
-    let id = this.getAttribute("data-id");
-    this.style.backgroundImage = `url(${cardsLevel[id].img})`;
-    this.disabled = true;
-
-    choosenCards.push(cardsLevel[id].name);
-    choosenCardsId.push(id);
-
-    if (choosenCards.length === 2) {
-      setTimeout(check, 500);
-      turnsNumber++;
-      turns.textContent = turnsNumber;
-    }
-  }
+ 
 }
