@@ -105,26 +105,26 @@ function startGame() {
     if (choosenCards[0] === choosenCards[1]) {
 
 
-      // match.style.opacity = 1;
-      // match.style.visibility = "visible";
+      match.style.opacity = 1;
+      match.style.visibility = "visible";
 
-      // setTimeout(function () {
-      //   match.style.opacity = 0;
-      //   match.style.visibility = "hidden";
-      // }, 1000);
+      setTimeout(function () {
+        match.style.opacity = 0;
+        match.style.visibility = "hidden";
+      }, 1000);
 
       cards[firstId].style.backgroundImage = `url(./img/white.svg)`;
       cards[secondId].style.backgroundImage = `url(./img/white.svg)`;
 
       cardsWon.push(choosenCards);
     } else {
-      // fail.style.opacity = 1;
-      // fail.style.visibility = "visible";
+      fail.style.opacity = 1;
+      fail.style.visibility = "visible";
 
-      // setTimeout(function () {
-      //   fail.style.opacity = 0;
-      //   fail.style.visibility = "hidden";
-      // }, 1000);
+      setTimeout(function () {
+        fail.style.opacity = 0;
+        fail.style.visibility = "hidden";
+      }, 1000);
 
       cards[firstId].style.backgroundImage = `url(./img/gili.svg)`;
       cards[secondId].style.backgroundImage = `url(./img/gili.svg)`;
