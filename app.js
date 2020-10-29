@@ -1,11 +1,10 @@
 function startGame() {
   event.preventDefault();
 
-
-
   let choosenCards = [];
   let choosenCardsId = [];
   let cardsWon = [];
+  let disabledButtons = [];
   let cardsShuffled;
   let turnsNumber = 0;
   const name = document.querySelector("#name").value;
@@ -20,10 +19,7 @@ function startGame() {
   const turns = document.querySelector("#turns");
   const endTurns = document.querySelector("#endTurns");
 
-
   const nameValue = document.querySelector("#nameValue");
-
-  
 
   form.style.opacity = 0;
   form.style.visibility = "hidden";
@@ -57,10 +53,9 @@ function startGame() {
     { name: "zolw", img: "./img/zolw.svg" },
   ];
 
- 
   if (level === "easy") {
     cardsShuffled = cardsArray.slice(12);
-    grid.classList.add('easy')
+    grid.classList.add("easy");
   } else if (level === "medium") {
     cardsShuffled = cardsArray.slice(8);
   } else if (level === "hard") {
@@ -77,10 +72,9 @@ function startGame() {
     grid.appendChild(button);
   });
 
+  // flip
 
-   // flip
-
-   function flipcard() {
+  function flipcard() {
     let id = this.getAttribute("data-id");
     this.style.backgroundImage = `url(${cardsShuffled[id].img})`;
     this.disabled = true;
@@ -89,7 +83,18 @@ function startGame() {
     choosenCardsId.push(id);
 
     if (choosenCards.length === 2) {
+      let cards = document.querySelectorAll("button");
+      cards.forEach((card) => (card.disabled = true));
+      setTimeout(() => {
+        cards.forEach((card) => {
+          card.disabled = false;
+        });
+      }, 1000);
+      setTimeout(() => {
+        disabledButtons.forEach((button) => (button.disabled = true));
+      }, 1001);
       setTimeout(check, 1000);
+
       turnsNumber++;
       turns.textContent = turnsNumber;
     }
@@ -103,28 +108,28 @@ function startGame() {
     let secondId = choosenCardsId[1];
 
     if (choosenCards[0] === choosenCards[1]) {
+      // match.style.opacity = 1;
+      // match.style.visibility = "visible";
 
-
-      match.style.opacity = 1;
-      match.style.visibility = "visible";
-
-      setTimeout(function () {
-        match.style.opacity = 0;
-        match.style.visibility = "hidden";
-      }, 1000);
+      // setTimeout(function () {
+      //   match.style.opacity = 0;
+      //   match.style.visibility = "hidden";
+      // }, 1000);
 
       cards[firstId].style.backgroundImage = `url(./img/white.svg)`;
       cards[secondId].style.backgroundImage = `url(./img/white.svg)`;
+      disabledButtons.push(cards[firstId]);
+      disabledButtons.push(cards[secondId]);
 
       cardsWon.push(choosenCards);
     } else {
-      fail.style.opacity = 1;
-      fail.style.visibility = "visible";
+      // fail.style.opacity = 1;
+      // fail.style.visibility = "visible";
 
-      setTimeout(function () {
-        fail.style.opacity = 0;
-        fail.style.visibility = "hidden";
-      }, 1000);
+      // setTimeout(function () {
+      //   fail.style.opacity = 0;
+      //   fail.style.visibility = "hidden";
+      // }, 1000);
 
       cards[firstId].style.backgroundImage = `url(./img/gili.svg)`;
       cards[secondId].style.backgroundImage = `url(./img/gili.svg)`;
@@ -142,6 +147,4 @@ function startGame() {
       endTurns.textContent = turnsNumber;
     }
   }
-
- 
 }
